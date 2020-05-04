@@ -38,6 +38,13 @@ It should be noted that the date of the sales is only present in the file names,
   
   ![add-sales-date.png](images/filter-date.png)
   
-  While this works, I need to manyally change thedate filter every day, in order to make sure I still get the last 7 days tomorrow. I can do this by aplying a dynamic filter. 
+  While this works, I need to manually change the date filter every day, in order to make sure I still get the last 7 days tomorrow. I can do this by aplying a dynamic filter. 
   
+  I need to go to the Advanced Editor option, and change the line applying the SalesDate filter just created as follows:
+  [TODO] add a description of Advanced Editor
+  `#"Filtered Rows" = Table.SelectRows(#"Changed Type", each [SalesDate] > Date.AddDays ( DateTime.LocalNow(), -7 ))` 
+  This change now calculates the last 7 days based on the current date (`DateTime.LocalNow()`), making sure the refresh will also work tomorrow. If the number of days loaded is likely to change often, I can also use a parameter:
+  `#"Filtered Rows" = Table.SelectRows(#"Changed Type", each [SalesDate] > Date.AddDays ( DateTime.LocalNow(), -1 * noDays ))`
+  
+  ### Only load the last 7 files 
   
