@@ -69,7 +69,7 @@ It should be noted that the date of the sales is only present in the file names,
     
   If the number of files I wish to load is likely to change often, I can also use a parameter (I named the parameter noFiles in this example). Once I create the parameter, I just need to change the filter in the Advanced Editor, as follows:
     
-    `#"Filtered Rows" = Table.SelectRows(#"Added Index", each [Index] < noFiles)`
+  `#"Filtered Rows" = Table.SelectRows(#"Added Index", each [Index] < noFiles)`
   
 ### Merge files
   I have now made sure I am only loading the files I need to, as opposed to everything that's in the folder. Next step is to merge the content of these files into one Power BI semantic table. In order to do that, I need to click on the Combine Files option in the Content column.
@@ -107,3 +107,16 @@ It should be noted that the date of the sales is only present in the file names,
   ![all-data.png](images/all-data.png)       
     
   ### Summary 
+  1.  Use the Folder data surce and point to the relevant folder
+  2.  Derive the relevant date from the file name
+  3.  
+   ##### filter by date
+   - Add a filter on the relevant date to only load the most recent 7 files
+   - Use a parameter to be able to easuly change the number of files to be loaded
+   ##### filter by index 
+   - Sort the dataset by the relevant date, descending
+   - Add an index
+   - Add a filter on the index, to only include the most recent 7 files
+   - Use a parameter to be able to easuly change the number of files to be loaded
+  4.  Combine the files
+  5.  Change the Remove Columns step to include the SalesDate in the final table
